@@ -4,6 +4,10 @@ image:
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
+# The bot can be provided with an existing secret that contains both the password and the webhook.
+# Otherwise a secret will be created
+existingSecret: ""
+
 email:
   user: ""
   password: ""
