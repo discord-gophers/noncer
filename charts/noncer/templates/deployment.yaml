@@ -37,15 +37,34 @@ spec:
           - -port
           - "{{ .Values.email.port }}"
           - -pass
-          - "{{ .Values.email.password }}"
+          - "$(PASSWORD)"
           - -period
           - "{{ .Values.bot.period }}"
           - -webhook
-          - "{{ .Values.bot.webhook }}"
+          - "$(WEBHOOK)"
           {{- range .Values.bot.allowList}}
           - -allowlist
           - "{{ . }}"
-          {{- end }}  
+          {{- end }}
+          env:
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.existingSecret }}
+                name: "{{ .Values.existingSecret }}"
+              {{- else }}
+                name: "{{ include "noncer.name" . }}"
+              {{- end }}
+                key: password
+          - name: WEBHOOK
+            valueFrom:
+              secretKeyRef:
+              {{- if .Values.existingSecret }}
+                name: "{{ .Values.existingSecret }}"
+              {{- else }}
+                name: "{{ include "noncer.name" . }}"
+              {{- end }}
+                key: webhook
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
