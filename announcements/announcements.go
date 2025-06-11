@@ -112,7 +112,7 @@ func remove(im *imap.Dialer, uids []int) error {
 	return err
 }
 
-var bracketLinkRe = regexp.MustCompile(`\[((https?://)([^\]]*[^\\\]]))\]\((https?://[^)]+[^\\)])\)`)
+var bracketLinkRe = regexp.MustCompile(`\[((https?://)([^\]]*[^\\\]]))\]\((https?://[^)]*[^\\)])\)`)
 
 var converter = md.NewConverter("", true, &md.Options{
 	HeadingStyle:    "setext",
