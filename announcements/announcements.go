@@ -3,6 +3,7 @@ package announcements
 import (
 	"context"
 	"fmt"
+	"regexp"
 	"strings"
 	"time"
 
@@ -111,10 +112,22 @@ func remove(im *imap.Dialer, uids []int) error {
 	return err
 }
 
+var bracketLinkRe = regexp.MustCompile(`\[((http(?:s)?://)([^\]]*[^\\\]]))\]\((http(?:s)?://[^)]+[^\\)])\)`)
+
 var converter = md.NewConverter("", true, &md.Options{
 	HeadingStyle:    "setext",
 	StrongDelimiter: "**",
 	LinkStyle:       "inlined",
+}).After(func(content string) string {
+	return bracketLinkRe.ReplaceAllStringFunc(content, func(bracketLink string) string {
+		matches := bracketLinkRe.FindStringSubmatch(bracketLink)
+		fmt.Println(matches)
+		text, textNoSchema, link := matches[1], matches[3], matches[4]
+		if text == link {
+			return "<" + link + ">"
+		}
+		return fmt.Sprintf("[%s](%s)", textNoSchema, link)
+	})
 })
 
 // markdownBody takes a html string and converts it into a formatted markdown body.
