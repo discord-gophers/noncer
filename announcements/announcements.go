@@ -121,7 +121,6 @@ var converter = md.NewConverter("", true, &md.Options{
 }).After(func(content string) string {
 	return bracketLinkRe.ReplaceAllStringFunc(content, func(bracketLink string) string {
 		matches := bracketLinkRe.FindStringSubmatch(bracketLink)
-		fmt.Println(matches)
 		text, textNoSchema, link := matches[1], matches[3], matches[4]
 		if text == link {
 			return "<" + link + ">"
