@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   noncer:
   - apiVersion: v2
+    appVersion: 0.0.3
+    created: "2025-12-03T12:01:38.866011686Z"
+    description: A Helm chart for the go announcements bot
+    digest: b81b21ba16a4ee467a81ad4efb57a7df6a7bab53ee1cb7ca9d2a6f3561f54e63
+    name: noncer
+    type: application
+    urls:
+    - https://github.com/discord-gophers/noncer/releases/download/noncer-0.1.2/noncer-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
     appVersion: 0.0.2
     created: "2025-06-17T14:30:13.855074903Z"
     description: A Helm chart for the go announcements bot
@@ -51,4 +61,4 @@ entries:
     urls:
     - https://github.com/discord-gophers/noncer/releases/download/noncer-0.0.1/noncer-0.0.1.tgz
     version: 0.0.1
-generated: "2025-06-17T14:30:13.855097025Z"
+generated: "2025-12-03T12:01:38.866047082Z"
