@@ -156,7 +156,7 @@ func buildContents(maxLen int, subject, body string) (contents []string) {
 	for max < len(body) {
 		body = strings.TrimSpace(body)
 
-		i := strings.LastIndexAny(body[:max], "\n.!")
+		i := strings.LastIndex(body[:max], "\n")
 		// there are no new lines in the first max len chars
 		if i == -1 {
 			i = max - 1
